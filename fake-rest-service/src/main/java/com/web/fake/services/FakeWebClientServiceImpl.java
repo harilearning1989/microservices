@@ -1,6 +1,8 @@
 package com.web.fake.services;
 
 import com.web.fake.records.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -9,11 +11,7 @@ import reactor.core.publisher.Flux;
 @Service
 public class FakeWebClientServiceImpl implements FakeWebClientService {
 
-    /*private final WebClient webClient;
-
-    public FakeApiServiceImpl(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.baseUrl("https://jsonplaceholder.typicode.com").build();
-    }*/
+    private static final Logger LOGGER = LoggerFactory.getLogger(FakeWebClientServiceImpl.class);
 
     @Value("${fake.rest.jsonPlaceHolder}")
     private String jsonPlaceHolder;
@@ -24,26 +22,13 @@ public class FakeWebClientServiceImpl implements FakeWebClientService {
     @Value("${fake.rest.fakeRestApi}")
     private String fakeRestApi;
 
-    private final WebClient.Builder webClientBuilder;
-
-    public FakeWebClientServiceImpl(WebClient.Builder webClientBuilder) {
-        this.webClientBuilder = webClientBuilder;
-    }
-
     private WebClient createClient(String baseUrl) {
-        return webClientBuilder.baseUrl(baseUrl).build();
+        return WebClient.builder().baseUrl(baseUrl).build();
     }
-
-    /*@Override
-    public Flux<FakeApiResponse> getAllPosts() {
-        return webClient.get()
-                .uri("/posts")
-                .retrieve()
-                .bodyToFlux(FakeApiResponse.class);
-    }*/
 
     @Override
-    public Flux<Posts> getAllPosts() {
+    public Flux<Posts> fetchPosts() {
+        LOGGER.info("getAllPosts URL::{}", jsonPlaceHolder);
         return createClient(jsonPlaceHolder)
                 .get()
                 .uri("/posts")
@@ -52,6 +37,7 @@ public class FakeWebClientServiceImpl implements FakeWebClientService {
     }
 
     public Flux<Product> fetchProducts() {
+        LOGGER.info("fetchProducts URL::{}", products);
         return createClient(products)
                 .get()
                 .uri("/products")
@@ -60,6 +46,7 @@ public class FakeWebClientServiceImpl implements FakeWebClientService {
     }
 
     public Flux<Cart> fetchCarts() {
+        LOGGER.info("fetchCarts URL::{}", carts);
         return createClient(carts)
                 .get()
                 .uri("/carts")
@@ -68,6 +55,7 @@ public class FakeWebClientServiceImpl implements FakeWebClientService {
     }
 
     public Flux<Book> fetchBooks() {
+        LOGGER.info("fetchBooks URL::{}", fakeRestApi);
         return createClient(fakeRestApi)
                 .get().uri("/api/v1/Books")
                 .retrieve()
@@ -75,6 +63,7 @@ public class FakeWebClientServiceImpl implements FakeWebClientService {
     }
 
     public Flux<Authors> fetchAuthors() {
+        LOGGER.info("fetchAuthors URL::{}", fakeRestApi);
         return createClient(fakeRestApi)
                 .get().uri("/api/v1/Authors")
                 .retrieve()
@@ -82,6 +71,7 @@ public class FakeWebClientServiceImpl implements FakeWebClientService {
     }
 
     public Flux<Comments> fetchComments() {
+        LOGGER.info("fetchComments URL::{}", jsonPlaceHolder);
         return createClient(jsonPlaceHolder)
                 .get().uri("/comments")
                 .retrieve()
@@ -89,6 +79,7 @@ public class FakeWebClientServiceImpl implements FakeWebClientService {
     }
 
     public Flux<Todos> fetchTodos() {
+        LOGGER.info("fetchTodos URL::{}", jsonPlaceHolder);
         return createClient(jsonPlaceHolder)
                 .get().uri("/todos")
                 .retrieve()
@@ -96,6 +87,7 @@ public class FakeWebClientServiceImpl implements FakeWebClientService {
     }
 
     public Flux<Photos> fetchPhotos() {
+        LOGGER.info("fetchPhotos URL::{}", jsonPlaceHolder);
         return createClient(jsonPlaceHolder)
                 .get().uri("/photos")
                 .retrieve()

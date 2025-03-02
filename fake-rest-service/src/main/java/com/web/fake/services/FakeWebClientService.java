@@ -5,7 +5,7 @@ import reactor.core.publisher.Flux;
 
 public interface FakeWebClientService {
 
-    Flux<Posts> getAllPosts();
+    Flux<Posts> fetchPosts();
     Flux<Product> fetchProducts();
     Flux<Cart> fetchCarts();
     Flux<Book> fetchBooks();

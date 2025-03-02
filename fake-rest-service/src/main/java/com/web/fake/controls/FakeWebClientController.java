@@ -20,7 +20,7 @@ public class FakeWebClientController {
 
     @GetMapping(value = "/posts", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<Posts> streamAllPosts() {
-        return fakeApiService.getAllPosts();
+        return fakeApiService.fetchPosts();
     }
 
     @GetMapping(value = "/products", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
