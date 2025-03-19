@@ -18,9 +18,9 @@ public class FakeRestTemplateController {
         this.fakeRestTemplateService = fakeRestTemplateService;
     }
 
-    @GetMapping(value = "/posts")
-    public List<Posts> streamAllPosts() {
-        return fakeRestTemplateService.fetchPosts();
+    @GetMapping(value = "/photos")
+    public List<Photos> getPhotos() {
+        return fakeRestTemplateService.fetchPhotos();
     }
 
     @GetMapping("/products")
@@ -31,6 +31,11 @@ public class FakeRestTemplateController {
     @GetMapping("/carts")
     public CartResponse getCarts() {
         return fakeRestTemplateService.fetchCarts();
+    }
+
+    @GetMapping(value = "/posts")
+    public List<Posts> streamAllPosts() {
+        return fakeRestTemplateService.fetchPosts();
     }
 
     @GetMapping("/books")
@@ -53,8 +58,5 @@ public class FakeRestTemplateController {
         return fakeRestTemplateService.fetchTodos();
     }
 
-    @GetMapping(value = "/photos")
-    public List<Photos> getPhotos() {
-        return fakeRestTemplateService.fetchPhotos();
-    }
+
 }
