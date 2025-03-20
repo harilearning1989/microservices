@@ -16,6 +16,11 @@ public class FakeRestTemplateController {
         this.fakeRestTemplateService = fakeRestTemplateService;
     }
 
+    @GetMapping(value = "/listParallel")
+    public AllApiResponse fetchAllData() {
+        return fakeRestTemplateService.fetchAllData();
+    }
+
     @GetMapping(value = "/list")
     public AllApiResponse getAllApisData() {
         return fakeRestTemplateService.getAllApisData();
