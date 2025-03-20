@@ -19,5 +19,16 @@ public class AsyncConfig {
         executor.initialize();
         return executor;
     }
+
+    @Bean(name = "apiExecutor")
+    public Executor apiExecutor() {
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setCorePoolSize(8);  // Minimum number of threads
+        executor.setMaxPoolSize(16);  // Maximum threads
+        executor.setQueueCapacity(50); // Queue size
+        executor.setThreadNamePrefix("ApiThread-");
+        executor.initialize();
+        return executor;
+    }
 }
 

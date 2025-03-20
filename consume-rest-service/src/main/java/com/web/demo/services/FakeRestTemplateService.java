@@ -6,4 +6,6 @@ public interface FakeRestTemplateService {
     AllApiResponse getAllApisData();
 
     AllApiResponse fetchAllData();
+
+    AllApiResponse fetchAllDataThread();
 }
