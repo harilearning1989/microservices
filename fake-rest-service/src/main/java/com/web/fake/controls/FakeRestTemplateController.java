@@ -38,12 +38,12 @@ public class FakeRestTemplateController {
         return fakeRestTemplateService.fetchPosts();
     }
 
-    @GetMapping("/books")
+    @GetMapping("/api/v1/Books")
     public List<Book> getBooks() {
         return fakeRestTemplateService.fetchBooks();
     }
 
-    @GetMapping(value = "/authors")
+    @GetMapping(value = "/api/v1/Authors")
     public List<Authors> getAuthors() {
         return fakeRestTemplateService.fetchAuthors();
     }

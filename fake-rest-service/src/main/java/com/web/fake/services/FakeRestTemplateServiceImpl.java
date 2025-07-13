@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class FakeRestTemplateServiceImpl implements FakeRestTemplateService {
@@ -38,12 +39,25 @@ public class FakeRestTemplateServiceImpl implements FakeRestTemplateService {
                 new ParameterizedTypeReference<List<Product>>() {
                 }
         ).getBody();
+        try {
+            //Thread.sleep(10000);
+            TimeUnit.MINUTES.sleep(5); // sleeps for 2 seconds
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.out.println("Thread was interrupted!");
+        }
         return CommonUtils.getLimitedList(productList,10);
     }
 
     @Override
     public CartResponse fetchCarts() {
         String url = carts + "/carts";
+        try {
+            TimeUnit.MINUTES.sleep(5);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.out.println("Thread was interrupted!");
+        }
         return restTemplate.getForObject(url, CartResponse.class);
     }
 
@@ -57,17 +71,17 @@ public class FakeRestTemplateServiceImpl implements FakeRestTemplateService {
                 new ParameterizedTypeReference<List<Book>>() {
                 }
         ).getBody();
+        try {
+            TimeUnit.MINUTES.sleep(5);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.out.println("Thread was interrupted!");
+        }
         return CommonUtils.getLimitedList(bookList,10);
     }
 
     @Override
     public List<Authors> fetchAuthors() {
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            System.out.println("Thread was interrupted!");
-        }
         String url = fakeRestApi + "/api/v1/Authors";
         List<Authors> authorsList = restTemplate.exchange(
                 url,
@@ -76,6 +90,12 @@ public class FakeRestTemplateServiceImpl implements FakeRestTemplateService {
                 new ParameterizedTypeReference<List<Authors>>() {
                 }
         ).getBody();
+        try {
+            TimeUnit.MINUTES.sleep(5);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.out.println("Thread was interrupted!");
+        }
         //System.out.println(10/0);
         return CommonUtils.getLimitedList(authorsList,10);
     }
@@ -90,7 +110,14 @@ public class FakeRestTemplateServiceImpl implements FakeRestTemplateService {
                 new ParameterizedTypeReference<List<Posts>>() {
                 }
         ).getBody();
-        return CommonUtils.getLimitedList(postsList,10);
+        try {
+            TimeUnit.MINUTES.sleep(5);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.out.println("Thread was interrupted!");
+        }
+        //return CommonUtils.getLimitedList(postsList,10);
+        return postsList;
     }
 
     @Override
@@ -103,6 +130,12 @@ public class FakeRestTemplateServiceImpl implements FakeRestTemplateService {
                 new ParameterizedTypeReference<List<Comments>>() {
                 }
         ).getBody();
+        try {
+            TimeUnit.MINUTES.sleep(5);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.out.println("Thread was interrupted!");
+        }
         return CommonUtils.getLimitedList(commentsList,10);
     }
 
@@ -116,6 +149,12 @@ public class FakeRestTemplateServiceImpl implements FakeRestTemplateService {
                 new ParameterizedTypeReference<List<Todos>>() {
                 }
         ).getBody();
+        try {
+            TimeUnit.MINUTES.sleep(5);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.out.println("Thread was interrupted!");
+        }
         return CommonUtils.getLimitedList(todosList,10);
     }
 
@@ -129,6 +168,12 @@ public class FakeRestTemplateServiceImpl implements FakeRestTemplateService {
                 new ParameterizedTypeReference<List<Photos>>() {
                 }
         ).getBody();
+        try {
+            TimeUnit.MINUTES.sleep(5);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.out.println("Thread was interrupted!");
+        }
         return CommonUtils.getLimitedList(photosList,10);
     }
 }

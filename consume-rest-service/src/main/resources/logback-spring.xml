@@ -1,0 +1,14 @@
+<configuration>
+    <appender name="SPLUNK" class="com.splunk.logging.HttpEventCollectorLogbackAppender">
+        <url>http://localhost:8088</url> <!-- Change to Splunk HEC URL -->
+        <token>bf3faa19-3eaa-47ff-9729-819cc7cc58ac</token>
+        <source>spring-boot</source>
+        <!--<sourcetype>_json</sourcetype>-->
+        <host>localhost</host>
+        <index>main</index>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="SPLUNK"/>
+    </root>
+</configuration>
