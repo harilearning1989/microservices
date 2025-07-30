@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fake-rest-service-configs
+  namespace: kubernetes-dashboard
+data:
+  SLEEP_TIME: "1"
+  JSON_PLACEHOLDER_URL: "https://jsonplaceholder.typicode.com"
+  PRODUCTS_URL: "https://fakestoreapi.com"
+  CARTS_URL: "https://dummyjson.com"
+  FAKEREST_URL: "https://fakerestapi.azurewebsites.net"

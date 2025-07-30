@@ -1,38 +1,32 @@
-# Use Eclipse Temurin JDK 20 base image (Alpine variant)
-FROM eclipse-temurin:20-jre-alpine
+# Use a JDK 20 base image
+#FROM eclipse-temurin:20-jdk-alpine
+# Use a compatible Java 20 image with ARM64 support
+FROM eclipse-temurin:20-jdk
 
-# Define the path to your WAR file (build-time argument)
-ARG JAR_FILE=build/libs/fake-rest-service-0.0.1-SNAPSHOT.jar
+# Set the working directory in the container
+WORKDIR /app
 
-# Add the WAR file to the container
-ADD ${JAR_FILE} fake-rest-service-0.0.1-SNAPSHOT.jar
+# Copy the built JAR file to the container
+COPY build/libs/*.jar app.jar
 
-# Set the container entrypoint
-ENTRYPOINT ["java", "-jar", "fake-rest-service-0.0.1-SNAPSHOT.jar"]
+# Expose port 8082
+EXPOSE 8082
 
-# Expose the application port
-EXPOSE 8081
+# Run the application
+ENTRYPOINT ["java", "-jar", "app.jar"]
 
-FROM eclipse-temurin:20-jre-alpine
+#docker build -t fake-rest-service:1.0.0 .
+#docker run -p 8082:8082 fake-rest-service:1.0.0
 
-MAINTAINER haritech.com
+#kubectl apply -f deployment.yaml
+#kubectl apply -f service.yaml
+#kubectl apply -f configmap.yaml
+#kubectl apply -f secrets.yaml
+#kubectl get pods
 
-ENV APP_HOME=/app
-WORKDIR ${APP_HOME}
+# View cluster info
+#kubectl cluster-info
 
-# Add non-root user
-RUN addgroup -S spring && adduser -S spring -G spring
-USER spring:spring
+# View all resources in the cluster
+#kubectl get all --all-namespaces
 
-# Copy the built jar from builder stage
-COPY --from=builder build/libs/*.jar fake-rest-service.jar
-
-# Expose application port
-EXPOSE 8080
-
-# Optional: Health check
-HEALTHCHECK --interval=30s --timeout=5s \
-  CMD wget --no-verbose --tries=1 --spider http://localhost:8080/actuator/health || exit 1
-
-# Run the app
-ENTRYPOINT ["java","-jar","app.jar"]

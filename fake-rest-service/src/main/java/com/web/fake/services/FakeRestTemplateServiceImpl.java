@@ -24,6 +24,8 @@ public class FakeRestTemplateServiceImpl implements FakeRestTemplateService {
     private String carts;
     @Value("${fake.rest.fakeRestApi}")
     private String fakeRestApi;
+    @Value("${sleep.time}")
+    private int sleepTime;
 
     public FakeRestTemplateServiceImpl(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
@@ -41,7 +43,7 @@ public class FakeRestTemplateServiceImpl implements FakeRestTemplateService {
         ).getBody();
         try {
             //Thread.sleep(10000);
-            TimeUnit.MINUTES.sleep(5); // sleeps for 2 seconds
+            TimeUnit.MINUTES.sleep(sleepTime); // sleeps for 2 seconds
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             System.out.println("Thread was interrupted!");
@@ -53,7 +55,7 @@ public class FakeRestTemplateServiceImpl implements FakeRestTemplateService {
     public CartResponse fetchCarts() {
         String url = carts + "/carts";
         try {
-            TimeUnit.MINUTES.sleep(5);
+            TimeUnit.MINUTES.sleep(sleepTime);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             System.out.println("Thread was interrupted!");
@@ -72,7 +74,7 @@ public class FakeRestTemplateServiceImpl implements FakeRestTemplateService {
                 }
         ).getBody();
         try {
-            TimeUnit.MINUTES.sleep(5);
+            TimeUnit.MINUTES.sleep(sleepTime);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             System.out.println("Thread was interrupted!");
@@ -91,7 +93,7 @@ public class FakeRestTemplateServiceImpl implements FakeRestTemplateService {
                 }
         ).getBody();
         try {
-            TimeUnit.MINUTES.sleep(5);
+            TimeUnit.MINUTES.sleep(sleepTime);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             System.out.println("Thread was interrupted!");
@@ -111,7 +113,7 @@ public class FakeRestTemplateServiceImpl implements FakeRestTemplateService {
                 }
         ).getBody();
         try {
-            TimeUnit.MINUTES.sleep(5);
+            TimeUnit.MINUTES.sleep(sleepTime);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             System.out.println("Thread was interrupted!");
@@ -131,7 +133,7 @@ public class FakeRestTemplateServiceImpl implements FakeRestTemplateService {
                 }
         ).getBody();
         try {
-            TimeUnit.MINUTES.sleep(5);
+            TimeUnit.MINUTES.sleep(sleepTime);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             System.out.println("Thread was interrupted!");
@@ -150,7 +152,7 @@ public class FakeRestTemplateServiceImpl implements FakeRestTemplateService {
                 }
         ).getBody();
         try {
-            TimeUnit.MINUTES.sleep(5);
+            TimeUnit.MINUTES.sleep(sleepTime);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             System.out.println("Thread was interrupted!");
@@ -168,12 +170,12 @@ public class FakeRestTemplateServiceImpl implements FakeRestTemplateService {
                 new ParameterizedTypeReference<List<Photos>>() {
                 }
         ).getBody();
-        try {
+       /* try {
             TimeUnit.MINUTES.sleep(5);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             System.out.println("Thread was interrupted!");
-        }
+        }*/
         return CommonUtils.getLimitedList(photosList,10);
     }
 }

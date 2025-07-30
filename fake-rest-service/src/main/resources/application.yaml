@@ -9,12 +9,19 @@ spring:
 server:
   port: 8082
 
+user:
+  username: ${APP_USERNAME:hari}
+  password: ${APP_PASSWORD:June@123}
+
+sleep:
+  time: ${SLEEP_TIME:1}
+
 fake:
   rest:
-    jsonPlaceHolder: https://jsonplaceholder.typicode.com
-    products: https://fakestoreapi.com
-    carts: https://dummyjson.com
-    fakeRestApi: https://fakerestapi.azurewebsites.net
+    jsonPlaceHolder: ${JSON_PLACEHOLDER_URL:https://jsonplaceholder.typicode.com}
+    products: ${PRODUCTS_URL:https://fakestoreapi.com}
+    carts: ${CARTS_URL:https://dummyjson.com}
+    fakeRestApi: ${FAKEREST_URL:https://fakerestapi.azurewebsites.net}
 
 
   #"https://fakestoreapi.com/products",

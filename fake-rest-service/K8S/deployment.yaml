@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fake-rest-service-deployment
+  namespace: kubernetes-dashboard
+  labels:
+    app: fake-rest-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fake-rest-service
+  template:
+    metadata:
+      labels:
+        app: fake-rest-service
+    spec:
+      containers:
+        - name: fake-rest-service
+          image: fake-rest-service:1.0.1
+          ports:
+            - containerPort: 8082
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          env:
+            - name: SLEEP_TIME
+              valueFrom:
+                configMapKeyRef:
+                  name: fake-rest-service-configs
+                  key: SLEEP_TIME
+            - name: JSON_PLACEHOLDER_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: fake-rest-service-configs
+                  key: JSON_PLACEHOLDER_URL
+            - name: PRODUCTS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: fake-rest-service-configs
+                  key: PRODUCTS_URL
+            - name: CARTS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: fake-rest-service-configs
+                  key: CARTS_URL
+            - name: FAKEREST_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: fake-rest-service-configs
+                  key: FAKEREST_URL
+            - name: APP_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: fake-rest-service-credentials
+                  key: username
+            - name: APP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: fake-rest-service-credentials
+                  key: password
