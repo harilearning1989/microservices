@@ -1,0 +1,9 @@
+# gateway-config.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gateway-config
+  namespace: kubernetes-dashboard
+data:
+  FAKE_SERVICE_URI: "http://fake-rest-service:8082"
+  APP_NAME: "api-gateway-service"

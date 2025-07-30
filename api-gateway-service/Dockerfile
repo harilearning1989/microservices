@@ -7,15 +7,15 @@ FROM eclipse-temurin:20-jdk
 WORKDIR /app
 
 # Copy the built JAR file to the container
-COPY build/libs/fake-rest-service-0.0.1-SNAPSHOT.jar app.jar
+COPY build/libs/api-gateway-service-0.0.1-SNAPSHOT.jar api-gateway-service.jar
 
 # Expose port 8082
-EXPOSE 8082
+EXPOSE 8081
 
 # Run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "api-gateway-service.jar"]
 
-#docker build -t fake-rest-service:1.0.0 .
+#docker build -t api-gateway-service:1.0.0 .
 #docker run -p 8082:8082 fake-rest-service:1.0.0
 
 #kubectl apply -f deployment.yaml

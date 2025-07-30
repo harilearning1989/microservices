@@ -14,7 +14,7 @@ user:
   password: ${APP_PASSWORD:June@123}
 
 sleep:
-  time: ${SLEEP_TIME:1}
+  time: ${SLEEP_TIME:0}
 
 fake:
   rest:

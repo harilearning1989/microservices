@@ -16,6 +16,11 @@ public class LoggingAspect {
     private static final Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
     private static final ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
+    /*
+        @EnableAspectJAutoProxy	Enables AOP proxy support in non-Boot projects (optional in Spring Boot).
+        @Order	(From org.springframework.core.annotation.Order) Sets priority when multiple aspects target the same join point.
+     */
+
     //execution(public * com.web.fake.controls..*(..))  //only public methods
     //execution(* com.web.fake.controls.*Controller.*(..)) //only controller methods
     @Before("execution(* com.web.fake.controls..*(..))")
@@ -62,10 +67,14 @@ public class LoggingAspect {
         logger.info("logAfterReturning Exited {}.{}() ", className, methodName);
     }
 
-
     // Match any public method starting with "fetch" in your service implementation class
     @Pointcut("execution(public * com.web.fake.services.FakeRestTemplateServiceImpl.fetch*(..))")
     public void fetchMethods() {}
+
+    @AfterThrowing(pointcut = "fetchMethods()", throwing = "ex")
+    public void logAfterThrowing(JoinPoint joinPoint, Throwable ex) {
+        System.out.println("Exception: " + ex.getMessage());
+    }
 
     @Before("fetchMethods()")
     public void beforeFetch(JoinPoint joinPoint) {

@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: fake-rest-service
-          image: fake-rest-service:1.0.1
+          image: fake-rest-service:1.2.6
           ports:
             - containerPort: 8082
           resources:

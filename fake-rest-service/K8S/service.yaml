@@ -3,11 +3,12 @@ kind: Service
 metadata:
   name: fake-rest-service
   namespace: kubernetes-dashboard
+  labels:
+    app: fake-rest-service
 spec:
   selector:
     app: fake-rest-service
-  type: NodePort  # Use LoadBalancer for cloud
+  type: ClusterIP  # default; internal-only access
   ports:
-    - port: 8082
-      targetPort: 8082
-      nodePort: 30081  # Optional (can be omitted for auto-assigned port)
+    - port: 8082         # Service port (used by Gateway or other clients)
+      targetPort: 8082   # Port exposed by the pod container

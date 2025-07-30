@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/fake")
 public class FakeRestTemplateController {
 
-    private final Logger LOGGER = LoggerFactory.getLogger(getClass());
+    private static final Logger LOGGER = LoggerFactory.getLogger(FakeRestTemplateController.class);
 
     private final FakeRestTemplateService fakeRestTemplateService;
 
@@ -24,6 +24,7 @@ public class FakeRestTemplateController {
 
     @GetMapping(value = "/photos")
     public List<Photos> getPhotos() {
+        System.out.println("FakeRestTemplateController====================================getPhotos");
         LOGGER.info("Entry path: {} ", this.getClass().getName());
         return fakeRestTemplateService.fetchPhotos();
     }

@@ -2,6 +2,8 @@ package com.web.fake.services;
 
 import com.web.fake.records.*;
 import com.web.fake.utils.CommonUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -15,6 +17,8 @@ import java.util.concurrent.TimeUnit;
 public class FakeRestTemplateServiceImpl implements FakeRestTemplateService {
 
     private final RestTemplate restTemplate;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(FakeRestTemplateServiceImpl.class);
 
     @Value("${fake.rest.jsonPlaceHolder}")
     private String jsonPlaceHolder;
@@ -43,6 +47,7 @@ public class FakeRestTemplateServiceImpl implements FakeRestTemplateService {
         ).getBody();
         try {
             //Thread.sleep(10000);
+            LOGGER.info("fetchProducts Sleeping Thread for time : {}", sleepTime);
             TimeUnit.MINUTES.sleep(sleepTime); // sleeps for 2 seconds
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
@@ -55,6 +60,7 @@ public class FakeRestTemplateServiceImpl implements FakeRestTemplateService {
     public CartResponse fetchCarts() {
         String url = carts + "/carts";
         try {
+            LOGGER.info("fetchCarts Sleeping Thread for time : {}", sleepTime);
             TimeUnit.MINUTES.sleep(sleepTime);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
@@ -74,6 +80,7 @@ public class FakeRestTemplateServiceImpl implements FakeRestTemplateService {
                 }
         ).getBody();
         try {
+            LOGGER.info("fetchBooks Sleeping Thread for time : {}", sleepTime);
             TimeUnit.MINUTES.sleep(sleepTime);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
@@ -93,6 +100,7 @@ public class FakeRestTemplateServiceImpl implements FakeRestTemplateService {
                 }
         ).getBody();
         try {
+            LOGGER.info("fetchAuthors Sleeping Thread for time : {}", sleepTime);
             TimeUnit.MINUTES.sleep(sleepTime);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
@@ -113,6 +121,7 @@ public class FakeRestTemplateServiceImpl implements FakeRestTemplateService {
                 }
         ).getBody();
         try {
+            LOGGER.info("fetchPosts Sleeping Thread for time : {}", sleepTime);
             TimeUnit.MINUTES.sleep(sleepTime);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
@@ -133,6 +142,7 @@ public class FakeRestTemplateServiceImpl implements FakeRestTemplateService {
                 }
         ).getBody();
         try {
+            LOGGER.info("fetchComments Sleeping Thread for time : {}", sleepTime);
             TimeUnit.MINUTES.sleep(sleepTime);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
@@ -152,6 +162,7 @@ public class FakeRestTemplateServiceImpl implements FakeRestTemplateService {
                 }
         ).getBody();
         try {
+            LOGGER.info("fetchTodos Sleeping Thread for time : {}", sleepTime);
             TimeUnit.MINUTES.sleep(sleepTime);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
@@ -170,12 +181,14 @@ public class FakeRestTemplateServiceImpl implements FakeRestTemplateService {
                 new ParameterizedTypeReference<List<Photos>>() {
                 }
         ).getBody();
-       /* try {
-            TimeUnit.MINUTES.sleep(5);
+        try {
+            System.out.println("FakeRestTemplateServiceImpl====================fetchPhotos");
+            LOGGER.info("fetchPhotos Sleeping Thread for time : {}", sleepTime);
+            TimeUnit.MINUTES.sleep(sleepTime);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             System.out.println("Thread was interrupted!");
-        }*/
+        }
         return CommonUtils.getLimitedList(photosList,10);
     }
 }
