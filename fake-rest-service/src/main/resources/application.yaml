@@ -23,6 +23,17 @@ fake:
     carts: ${CARTS_URL:https://dummyjson.com}
     fakeRestApi: ${FAKEREST_URL:https://fakerestapi.azurewebsites.net}
 
+logging:
+  file:
+    name: /Users/hariduddukunta/MyWork/Softwares/ELK/logs/spring-boot.log
+  level:
+    root: INFO
+    com.web.fake: TRACE
+  pattern:
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+
+
+
 
   #"https://fakestoreapi.com/products",
   #"https://dummyjson.com/carts",
